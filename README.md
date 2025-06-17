@@ -18,5 +18,8 @@ This project is a Node.js application for business consulting services. It allow
 5. npm install sequelize tedious
 6. npm install express
 7. npm install dotenv
+8. npm install bcrypt
+9. npm install jsonwebtoken
+10. npm install express-async-handler
          
 
