@@ -11,7 +11,7 @@ const businessConsulting = new Sequelize('BusinessConsulting',process.env.DB_USE
             trustServerCertificate: true // Trust the server certificate
         }
     },
-    login:false
+    logging:false
 });
 
 module.exports = businessConsulting;
