@@ -1,6 +1,4 @@
-
 "# BusinessConsulting" 
-=======
 
 ## Overview
 This project is a Node.js application for business consulting services. It allows users to manage consultations, clients, and appointments.
@@ -23,4 +21,3 @@ This project is a Node.js application for business consulting services. It allow
 7. npm install dotenv
          
 
->>>>>>> 2ac7ac57701e5ef8af6eb4f7d6a95515c5020ff0
