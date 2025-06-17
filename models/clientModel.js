@@ -23,12 +23,16 @@ const Client = BusinessConsulting.define('Client', {
     email: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 }, {
     tableName: 'Client', // שם הטבלה במסד הנתונים
     timestamps: true,// אם אין שדות זמן
     createdAt: 'created_at', // שם השדה של יצירת רשומה
     updatedAt: false // שם השדה של עדכון רשומה
 });
-
+ 
 module.exports = Client;

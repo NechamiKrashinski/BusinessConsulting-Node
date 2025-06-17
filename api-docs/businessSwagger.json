@@ -1,0 +1,59 @@
+{
+    "paths": {
+      "/business": {
+        "post": {
+          "summary": "Create Business Detail",
+          "operationId": "createBusinessDetail",
+          "responses": {
+            "201": {
+              "description": "Business detail created"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get Business Details",
+          "operationId": "getBusinessDetails",
+          "responses": {
+            "200": {
+              "description": "List of business details"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Business Detail by ID",
+          "operationId": "updateBusinessDetail",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Business detail updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Business Detail by ID",
+          "operationId": "deleteBusinessDetail",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Business detail deleted"
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,59 @@
+{
+    "paths": {
+      "/meeting-time-slot": {
+        "post": {
+          "summary": "Create Meeting Time Slot",
+          "operationId": "createMeetingTimeSlot",
+          "responses": {
+            "201": {
+              "description": "Meeting time slot created"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get Meeting Time Slots",
+          "operationId": "getMeetingTimeSlots",
+          "responses": {
+            "200": {
+              "description": "List of meeting time slots"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Meeting Time Slot by ID",
+          "operationId": "updateMeetingTimeSlot",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Meeting time slot updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Meeting Time Slot by ID",
+          "operationId": "deleteMeetingTimeSlot",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Meeting time slot deleted"
+            }
+          }
+        }
+      }
+    }
+  }
+  

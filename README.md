@@ -1,3 +1,4 @@
+"# BusinessConsulting" 
 
 ## Overview
 This project is a Node.js application for business consulting services. It allows users to manage consultations, clients, and appointments.
@@ -21,5 +22,7 @@ This project is a Node.js application for business consulting services. It allow
 8. npm install bcrypt
 9. npm install jsonwebtoken
 10. npm install express-async-handler
+11. npm install swagger-ui-express swagger-jsdoc
+
          
 

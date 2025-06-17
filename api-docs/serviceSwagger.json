@@ -1,0 +1,59 @@
+{
+    "paths": {
+      "/service": {
+        "post": {
+          "summary": "Create Service",
+          "operationId": "createService",
+          "responses": {
+            "201": {
+              "description": "Service created"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get Services",
+          "operationId": "getServices",
+          "responses": {
+            "200": {
+              "description": "List of services"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Service by ID",
+          "operationId": "updateService",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Service updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Service by ID",
+          "operationId": "deleteService",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Service deleted"
+            }
+          }
+        }
+      }
+    }
+  }
+  

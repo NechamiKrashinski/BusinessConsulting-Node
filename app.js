@@ -6,12 +6,17 @@ const clientRoutes = require('./routers/clientRouter');
 const meetingRoutes = require('./routers/meetingRouter');
 const meetingTimeSlotRoutes = require('./routers/meetingTimeSlotRouter');
 const serviceRoutes = require('./routers/serviceRouter');
+const loginRouter = require('./routers/loginRouter');
+const { authenticateToken } = require('./middleware/authMiddleware');
+const { swaggerDocs, swaggerUi } = require('./swagger.js');
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/login',loginRouter);
+//app.use(authenticateToken);
 app.use('/business-details', businessDetailRoutes);
 app.use('/clients', clientRoutes);
 app.use('/meetings', meetingRoutes);
@@ -24,7 +29,7 @@ const startServer = async () => {
         await BusinessConsulting.authenticate();
         console.log('Connection has been established successfully.');
 
-        await BusinessConsulting.sync({ force: true });
+        await BusinessConsulting.sync({ force: false }); // Set force to true only during development to drop and recreate tables
         console.log('Database & tables synchronized!');
 
         app.listen(port, () => {
