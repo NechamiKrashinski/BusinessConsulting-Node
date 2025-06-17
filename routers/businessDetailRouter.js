@@ -9,6 +9,7 @@ const {
 } = require('../controllers/businessDetailController');
 
 // Route ליצירת פרטי עסק
+
 router.post('/', createBusinessDetail);
 
 // Route לקבלת כל פרטי העסק

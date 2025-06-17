@@ -23,6 +23,8 @@ app.use('/meetings', meetingRoutes);
 app.use('/meeting-time-slots', meetingTimeSlotRoutes);
 app.use('/services', serviceRoutes);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 const startServer = async () => {
     try {

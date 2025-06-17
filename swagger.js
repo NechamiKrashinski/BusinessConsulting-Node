@@ -20,14 +20,16 @@ const swaggerOptions = {
         // },
         servers: [
             {
-                url: 'http://localhost:3000', // Change this to your server URL
-            },
-        ],
+                url: "http://localhost:3000"
+            }
+        ]
     },
-    apis: ['./api-docs/*.js','./routers/*.js'], // Path to the API docs
+    apis: ['./api-docs/*js', './routers/*.js'], 
 };
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
 module.exports = {
     swaggerDocs,
-    swaggerUi,
-}
+    swaggerUi
+};
