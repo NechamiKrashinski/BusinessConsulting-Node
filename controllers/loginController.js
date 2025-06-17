@@ -13,7 +13,8 @@ const generateToken = (password) => {
 
 const registerClient = asyncHandler(async (req, res) => {
     const { name, phone, email, password } = req.body;
-
+    console.log("Registering client with data:", req.body);
+    
     if (!name || !email || !password) {
         res.status(400);
         throw new Error('Please provide all required fields');
@@ -64,9 +65,17 @@ const loginClient = asyncHandler(async (req, res) => {
     }
 
     const client = await Client.findOne({ where: { email } });
+try {
+    const clients = await Client.findAll();
+    console.log(clients);
+} catch (error) {
+    console.error('Error fetching clients:', error);
+}
 
     if (!client || !(await bcrypt.compare(password, client.password))) {
         res.status(401);
+        console.log(client+"client");
+        
         throw new Error('Invalid email or password');
     }
 
