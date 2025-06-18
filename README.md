@@ -23,6 +23,7 @@ This project is a Node.js application for business consulting services. It allow
 9. npm install jsonwebtoken
 10. npm install express-async-handler
 11. npm install swagger-ui-express swagger-jsdoc
+12. npm install cors
 
          
 

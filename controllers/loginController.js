@@ -1,12 +1,12 @@
 const {Client} = require('../models/associations.js');
-const clientController = require('../controllers/clientController.js');
+const Manager = require('../models/managerModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const asyncHandler = require('express-async-handler');
 
-const generateToken = (password) => {
-    return jwt.sign({ password }, process.env.JWT_SECRET, {
+const generateToken = (email,role) => {
+    return jwt.sign({ email, role}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRATION
         ,
     });
@@ -47,11 +47,11 @@ const registerClient = asyncHandler(async (req, res) => {
 
     if (client){
     res.status(201).json({
-        id: client.id,
         name: client.name,
         phone: client.phone,
         email: client.email,
-        token: `Bearer ${generateToken(client.password)}`,
+        role: 'client',
+        token: `Bearer ${generateToken(client.email,'client')}`,
     });}
     else {
         res.status(500);
@@ -60,6 +60,8 @@ const registerClient = asyncHandler(async (req, res) => {
 });
 
 const loginClient = asyncHandler(async (req, res) => {
+    console.log('Logging in client with data:', req.body);
+    
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -67,9 +69,21 @@ const loginClient = asyncHandler(async (req, res) => {
         throw new Error('Please provide email and password');
     }
 
-    const client = await Client.findOne({ where: { email:email } });
-    console.log(await bcrypt.compare(password, client.password));
-    
+    const manager = await Manager.findOne({ where: { email: email } }); // תיקון כאן
+    if (manager && await bcrypt.compare(password, manager.password)) {
+        res.status(200);
+        return res.json({
+            name: manager.name,
+            phone: manager.phone,
+            email: manager.email,
+            role: manager.role,
+            token: `Bearer ${generateToken(manager.email, manager.role)}`,
+        });
+    }
+
+    const client = await Client.findOne({ where: { email: email } });
+    console.log("Logging in client with email:", email);
+    console.log("Client found:", client);    
     
     if (!client || !(await bcrypt.compare(password, client.password))) {
         res.status(401);
@@ -79,11 +93,11 @@ const loginClient = asyncHandler(async (req, res) => {
     }
 
     res.json({
-        id: client.id,
         name: client.name,
         phone: client.phone,
         email: client.email,
-        token: `Bearer ${generateToken(client.password)}`,
+        role: 'client',
+        token: `Bearer ${generateToken(client.email, 'client')}`,
     });
 });
 
