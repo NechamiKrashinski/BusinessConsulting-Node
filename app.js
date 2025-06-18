@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const BusinessConsulting = require('./connection/dbConnection');
 const businessDetailRoutes = require('./routers/businessDetailRouter');
@@ -12,7 +13,7 @@ const { swaggerDocs, swaggerUi } = require('./swagger.js');
 const app = express();
 
 const port = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/login',loginRouter);

@@ -22,16 +22,6 @@ const BusinessDetail = businessConsulting.define('BusinessDetail', {
             isEmail: true,
         }
     },
-
-    owner_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    }
-    ,
     website: {
         type: DataTypes.STRING,
     },
