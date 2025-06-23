@@ -5,7 +5,8 @@ const {
     createMeetingTimeSlot,
     getMeetingTimeSlots,
     updateMeetingTimeSlot,
-    deleteMeetingTimeSlot
+    deleteMeetingTimeSlot,
+    
 } = require('../controllers/meetingTimeSlotController');
 
 // Route ליצירת זמן פגישה
@@ -19,5 +20,6 @@ router.put('/:id', updateMeetingTimeSlot);
 
 // Route למחיקת זמן פגישה לפי ID
 router.delete('/:id', deleteMeetingTimeSlot);
+
 
 module.exports = router;

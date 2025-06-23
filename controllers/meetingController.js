@@ -1,4 +1,4 @@
-const {Meeting} = require('../models/associations.js');
+const {Meeting,MeetingTimeSlot,Service,Client} = require('../models/associations.js');
 
 const createMeeting = async (req, res) => {
     try {
@@ -10,15 +10,6 @@ const createMeeting = async (req, res) => {
     }
 };
 
-const getMeetings = async (req, res) => {
-    try {
-        const meetings = await Meeting.findAll();
-        res.json(meetings);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching meetings');
-    }
-};
 
 const updateMeeting = async (req, res) => {
     try {
@@ -41,10 +32,40 @@ const deleteMeeting = async (req, res) => {
         res.status(500).send('Error deleting meeting');
     }
 };
+const getMeetings = async (req, res) => {
+    try {
+        const clientId = req.params.clientId;
 
+        const meetings = await MeetingTimeSlot.findAll({
+            include: [
+                {
+                    model: Meeting,
+                    attributes: ['date', 'start_time', 'end_time', 'status'], // רק פרטי הפגישה
+                    include: [
+                        {
+                            model: Service,
+                            attributes: ['name'], // רק שם השירות
+                        },
+                        {
+                            model: Client,
+                            attributes: ['name','email'], // רק שם הלקוח
+                            where: { id: clientId }
+                        }
+                    ]
+                }
+            ]
+        });
+
+        res.status(200).json(meetings);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving meetings' });
+    }
+};
 module.exports = {
     createMeeting,
     getMeetings,
     updateMeeting,
     deleteMeeting,
+    getMeetings
 };

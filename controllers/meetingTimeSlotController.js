@@ -47,4 +47,5 @@ module.exports = {
     getMeetingTimeSlots,
     updateMeetingTimeSlot,
     deleteMeetingTimeSlot,
+
 };
