@@ -20,9 +20,19 @@ const MeetingTimeSlot = BusinessConsulting.define('MeetingTimeSlot', {
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM('available', 'booked'), // סטטוסים אפשריים
+        type: DataTypes.ENUM('available', 'booked'), 
         allowNull: false,
         defaultValue: 'available'
+    },
+    notes:{
+        type: DataTypes.STRING, 
+        allowNull: true,
+        validate:{
+            len:{
+                args: [0, 250], 
+                msg: "The notes must be between 0 and 250 characters long." 
+            }
+        }
     },
     
     meeting_id: {
