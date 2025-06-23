@@ -1,5 +1,5 @@
-// models/Client.js
-const  DataTypes  = require('sequelize');
+// models/Manager.js
+const { DataTypes } = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
 
 const Manager = BusinessConsulting.define('Manager', {
@@ -9,11 +9,11 @@ const Manager = BusinessConsulting.define('Manager', {
         autoIncrement: true
     },
     name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-    phone:{
-        type:DataTypes.STRING,
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    phone: {
+        type: DataTypes.STRING,
         allowNull: true
     },
     email: {
@@ -24,15 +24,14 @@ const Manager = BusinessConsulting.define('Manager', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    role:{
+    role: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'manager' 
+        defaultValue: 'manager'
     }
 }, {
-    tableName: 'Manager', 
+    tableName: 'Manager',
     timestamps: false,
-   
 });
- 
+
 module.exports = Manager;

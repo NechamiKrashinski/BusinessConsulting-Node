@@ -8,7 +8,7 @@ const Meeting = BusinessConsulting.define('Meeting', {
         primaryKey: true,
         autoIncrement: true,
     },
-    user_id: {
+    client_id: {
         type: DataTypes.INTEGER,
         references: {
             model: Client,

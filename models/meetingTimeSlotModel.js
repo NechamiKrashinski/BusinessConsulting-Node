@@ -24,7 +24,15 @@ const MeetingTimeSlot = BusinessConsulting.define('MeetingTimeSlot', {
         allowNull: false,
         defaultValue: 'available'
     },
-    
+    notes:{
+        type: DataTypes.STRING, 
+        allowNull: true ,
+        validate: {
+        len: {
+            args: [0, 250], // הגבלת כמות התווים בין 0 ל-255
+            msg: "The notes must be between 0 and 250 characters."
+        }
+    }},
     meeting_id: {
         type: DataTypes.INTEGER,
         allowNull: true, // יכול להיות ריק אם הזמן פנוי

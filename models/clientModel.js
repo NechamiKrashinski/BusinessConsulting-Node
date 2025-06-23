@@ -24,10 +24,6 @@ const Client = BusinessConsulting.define('Client', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
 }, {
     tableName: 'Client', // שם הטבלה במסד הנתונים
     timestamps: true,// אם אין שדות זמן

@@ -1,5 +1,4 @@
 const {MeetingTimeSlot} = require('../models/associations.js');
-
 const createMeetingTimeSlot = async (req, res) => {
     try {
         const meetingTimeSlot = await MeetingTimeSlot.create(req.body);
@@ -41,6 +40,9 @@ const deleteMeetingTimeSlot = async (req, res) => {
         res.status(500).send('Error deleting meeting time slot');
     }
 };
+
+
+
 
 module.exports = {
     createMeetingTimeSlot,

@@ -2,6 +2,8 @@ const {Service} = require('../models/associations.js');
 
 const createService = async (req, res) => {
     try {
+        console.log("create service----");
+        
         const service = await Service.create(req.body);
         res.status(201).json(service);
     } catch (err) {

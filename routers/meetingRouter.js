@@ -8,16 +8,17 @@ const {
     deleteMeeting
 } = require('../controllers/meetingController');
 
+
 // Route ליצירת פגישה
-router.post('/', createMeeting);
+// router.post('/', createMeeting);
 
 // Route לקבלת כל הפגישות
 router.get('/', getMeetings);
 
-// Route לעדכון פגישה לפי ID
-router.put('/:id', updateMeeting);
+// // Route לעדכון פגישה לפי ID
+// router.put('/:id', updateMeeting);
 
-// Route למחיקת פגישה לפי ID
-router.delete('/:id', deleteMeeting);
+// // Route למחיקת פגישה לפי ID
+// router.delete('/:id', deleteMeeting);
 
 module.exports = router;
