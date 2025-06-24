@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1]; // הנחה שהטוקן נשלח בכותרת Authorization
-
+    
     if (!token) {
         return res.status(401).json({ error: 'No token provided' });
     };

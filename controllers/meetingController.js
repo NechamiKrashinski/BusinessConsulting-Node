@@ -1,8 +1,8 @@
-const {Meeting,MeetingTimeSlot,Service,Client} = require('../models/associations.js');
+const meetingService = require('../services/meetingService.js');
 
 const createMeeting = async (req, res) => {
     try {
-        const meeting = await Meeting.create(req.body);
+        const meeting = await meetingService.createMeeting(req.body);
         res.status(201).json(meeting);
     } catch (err) {
         console.error(err);
@@ -10,11 +10,10 @@ const createMeeting = async (req, res) => {
     }
 };
 
-
 const updateMeeting = async (req, res) => {
     try {
         const { id } = req.params;
-        await Meeting.update(req.body, { where: { id } });
+        await meetingService.updateMeeting(id, req.body);
         res.status(200).send('Meeting updated');
     } catch (err) {
         console.error(err);
@@ -25,47 +24,28 @@ const updateMeeting = async (req, res) => {
 const deleteMeeting = async (req, res) => {
     try {
         const { id } = req.params;
-        await Meeting.destroy({ where: { id } });
+        await meetingService.deleteMeeting(id);
         res.status(204).send();
     } catch (err) {
         console.error(err);
         res.status(500).send('Error deleting meeting');
     }
 };
+
 const getMeetings = async (req, res) => {
     try {
         const clientId = req.params.clientId;
-
-        const meetings = await MeetingTimeSlot.findAll({
-            include: [
-                {
-                    model: Meeting,
-                    attributes: ['date', 'start_time', 'end_time', 'status'], // רק פרטי הפגישה
-                    include: [
-                        {
-                            model: Service,
-                            attributes: ['name'], // רק שם השירות
-                        },
-                        {
-                            model: Client,
-                            attributes: ['name','email'], // רק שם הלקוח
-                            where: { id: clientId }
-                        }
-                    ]
-                }
-            ]
-        });
-
+        const meetings = await meetingService.getMeetings(clientId);
         res.status(200).json(meetings);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error retrieving meetings' });
     }
 };
+
 module.exports = {
     createMeeting,
     getMeetings,
     updateMeeting,
     deleteMeeting,
-    getMeetings
 };

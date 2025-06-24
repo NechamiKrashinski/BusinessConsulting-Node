@@ -1,6 +1,6 @@
 const express = require('express');
 //require('../api-docs/loginSwagger');
-const { registerManager,registerClient, loginClient } = require('../controllers/loginController');
+const { registerManager,registerClient, loginClient } = require('../controllers/authController');
 
 const router = express.Router();
 
