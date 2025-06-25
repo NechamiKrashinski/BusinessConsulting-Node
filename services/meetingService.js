@@ -1,4 +1,4 @@
-const { Meeting, MeetingTimeSlot, Service, Client } = require('../models/associations.js');
+const { Meeting, AvailableTimeSlots, Service, Client } = require('../models/associations.js');
 
 const createMeeting = async (meetingData) => {
     return await Meeting.create(meetingData);
@@ -13,7 +13,7 @@ const deleteMeeting = async (id) => {
 };
 
 const getMeetings = async (clientId) => {
-    return await MeetingTimeSlot.findAll({
+    return await AvailableTimeSlots.findAll({
         include: [
             {
                 model: Meeting,

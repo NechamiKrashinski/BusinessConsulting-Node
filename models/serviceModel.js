@@ -1,7 +1,8 @@
-const  DataTypes  = require('sequelize');
+const DataTypes = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
+
 const Service = BusinessConsulting.define('Service', {
-    id: {
+    Service_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -23,8 +24,8 @@ const Service = BusinessConsulting.define('Service', {
         allowNull: false
     }
 }, {
-    tableName: 'Service', // שם הטבלה במסד הנתונים
-    timestamps: false, // אם אין שדות זמן
-   
+    tableName: 'Service',
+    timestamps: false,
 });
+
 module.exports = Service;

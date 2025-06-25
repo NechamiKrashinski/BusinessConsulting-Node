@@ -1,7 +1,8 @@
 const DataTypes = require('sequelize');
-const businessConsulting = require('../connection/dbConnection.js');
-const BusinessDetail = businessConsulting.define('BusinessDetail', {
-    id: {
+const BusinessConsulting = require('../connection/dbConnection.js');
+
+const BusinessDetail = BusinessConsulting.define('BusinessDetail', {
+    business_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -18,7 +19,7 @@ const BusinessDetail = businessConsulting.define('BusinessDetail', {
     },
     email: {
         type: DataTypes.STRING,
-        validator: {
+        validate: {
             isEmail: true,
         }
     },
@@ -31,4 +32,5 @@ const BusinessDetail = businessConsulting.define('BusinessDetail', {
 }, {
     timestamps: false,
 });
+
 module.exports = BusinessDetail; 

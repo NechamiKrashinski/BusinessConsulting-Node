@@ -1,5 +1,5 @@
-const { Client } = require('../models/associations.js');
-const Manager = require('../models/managerModel.js');
+const { Client,BusinessConsultant } = require('../models/associations.js');
+// const BusinessConsultant = require('../models/businessConsultantModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -51,7 +51,7 @@ class AuthService {
             throw new Error('Please provide email and password');
         }
 
-        const manager = await Manager.findOne({ where: { email: email } });
+        const manager = await BusinessConsultant.findOne({ where: { email: email } });
         if (manager && await bcrypt.compare(password, manager.password)) {
             return generateToken(manager.email, 'manager');
         }
@@ -64,7 +64,7 @@ class AuthService {
         return generateToken(client.email, 'client');
     }
 
-    async registerManager(data) {
+    async registerBusinessConsultant(data) {
         const { name, phone, email, password } = data;
 
         if (!name || !email || !password) {
@@ -75,16 +75,16 @@ class AuthService {
             throw new Error('Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number');
         }
 
-        const existingManager = await Manager.findOne({ where: { email } });
+        const existingBusinessConsultant = await BusinessConsultant.findOne({ where: { email } });
 
-        if (existingManager) {
-            throw new Error('Manager already exists');
+        if (existingBusinessConsultant) {
+            throw new Error('BusinessConsultant already exists');
         }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const manager = await Manager.create({
+        const manager = await BusinessConsultant.create({
             name,
             phone,
             email,

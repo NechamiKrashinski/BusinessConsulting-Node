@@ -1,5 +1,5 @@
 const { Client } = require('../models/associations.js');
-const Manager = require('../models/managerModel.js');
+const Manager = require('../models/businessConsultantModel.js');
 const jwt = require('jsonwebtoken');
 
 const getProfile = async (token) => {

@@ -1,9 +1,8 @@
-// models/Client.js
-const  DataTypes  = require('sequelize');
+const DataTypes = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
 
 const Client = BusinessConsulting.define('Client', {
-    id: {
+    client_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -12,11 +11,11 @@ const Client = BusinessConsulting.define('Client', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    phone:{
-        type:DataTypes.STRING,
+    phone: {
+        type: DataTypes.STRING,
         allowNull: true
     },
-    password:{
+    password: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -24,12 +23,11 @@ const Client = BusinessConsulting.define('Client', {
         type: DataTypes.STRING,
         allowNull: false
     },
-   
 }, {
-    tableName: 'Client', // שם הטבלה במסד הנתונים
-    timestamps: true,// אם אין שדות זמן
-    createdAt: 'created_at', // שם השדה של יצירת רשומה
-    updatedAt: false // שם השדה של עדכון רשומה
+    tableName: 'Client',
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: false
 });
- 
+
 module.exports = Client;
