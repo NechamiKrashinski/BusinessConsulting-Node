@@ -1,8 +1,9 @@
 const { DataTypes } = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
-const BusinessHours = require('./businessHoursModel.js'); // ודא שהמודל קיים
-const Client = require('./clientModel.js');
-const Service = require('./serviceModel.js'); // ודא שהמודל קיים
+// const BusinessHours = require('./businessHoursModel.js');
+// const Client = require('./clientModel.js');
+// const Service = require('./serviceModel.js');
+const {Service,Client,BusinessHours} = require('./associations.js'); // Importing from associations.js
 
 const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
     id: {
@@ -15,21 +16,22 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
         allowNull: false,
         references: {
             model: BusinessHours,
-            key: 'business_hour_id'
+            key: 'id'
         }
     },
-    client_id: {
+    client_id: { // עמודה חדשה לקוח
         type: DataTypes.INTEGER,
         references: {
             model: Client,
-            key: 'client_id'
+            key: 'id'
         }
     },
-    service_id: { 
+    service_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Service,
-            key: 'service_id' // ודא שהמפתח נכון
+            key: 'id'
         }
     },
     date: {
@@ -62,4 +64,5 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
     tableName: 'AvailableTimeSlots',
     timestamps: false,
 });
+
 module.exports = AvailableTimeSlots;

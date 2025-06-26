@@ -4,7 +4,7 @@ const BusinessConsultant = require('./businessConsultantModel.js');
 const Service = require('./serviceModel.js');
 
 const ConsultantService = BusinessConsulting.define('ConsultantService', {
-    consultant_service_id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -13,14 +13,14 @@ const ConsultantService = BusinessConsulting.define('ConsultantService', {
         type: DataTypes.INTEGER,
         references: {
             model: BusinessConsultant,
-            key: 'consultant_id'
+            key: 'id'
         }
     },
     service_id: {
         type: DataTypes.INTEGER,
         references: {
             model: Service,
-            key: 'service_id'
+            key: 'id'
         }
     }
 });

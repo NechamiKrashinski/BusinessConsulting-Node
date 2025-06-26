@@ -2,7 +2,7 @@ const DataTypes = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
 
 const BusinessDetail = BusinessConsulting.define('BusinessDetail', {
-    business_id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,

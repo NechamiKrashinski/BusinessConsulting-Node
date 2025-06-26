@@ -3,7 +3,7 @@ const BusinessConsulting = require('../connection/dbConnection.js');
 const BusinessDetail = require('./businessDetailsModel.js');
 
 const BusinessConsultant = BusinessConsulting.define('BusinessConsultant', {
-    consultant_id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -20,6 +20,13 @@ const BusinessConsultant = BusinessConsulting.define('BusinessConsultant', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    role:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isIn: [['client', 'manager']]
+        }
+    }
     // business_id: {
     //     type: DataTypes.INTEGER,
     //     references: {

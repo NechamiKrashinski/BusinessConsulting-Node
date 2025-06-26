@@ -4,7 +4,7 @@ const express = require('express');
 const BusinessConsulting = require('./connection/dbConnection');
 const businessDetailRoutes = require('./routers/businessDetailRouter');
 const clientRoutes = require('./routers/clientRouter'); 
-const availableTimeSlotsRoutes = require('./routers/availableTimeSlotRouter.js');
+// const availableTimeSlotsRoutes = require('./routers/availableTimeSlotRouter.js');
 const serviceRoutes = require('./routers/serviceRouter');
 const loginRouter = require('./routers/authRouter');
 const profileRouter = require('./routers/profileRouter');
@@ -21,10 +21,10 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
-app.use(authenticateToken); 
+
 app.use('/business-details', businessDetailRoutes);
 app.use('/clients', clientRoutes);
-app.use('/meeting', availableTimeSlotsRoutes);
+// app.use('/meeting', availableTimeSlotsRoutes);
 app.use('/services', serviceRoutes);
 
 const startServer = async () => {

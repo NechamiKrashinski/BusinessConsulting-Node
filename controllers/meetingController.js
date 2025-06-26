@@ -1,5 +1,5 @@
 const { AvailableTimeSlots } = require('../models/associations');
-const { getMeetings} = require('../services/meetingService'); // נוודא שהנתיב נכון
+const { getMeetings} = require('../services/availableTimeSlotService'); // נוודא שהנתיב נכון
 
 const createAvailableTimeSlots = async (req, res) => {
     try {

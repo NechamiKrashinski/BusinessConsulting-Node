@@ -1,5 +1,5 @@
 const { Client } = require('../models/associations.js');
-const Manager = require('../models/businessConsultantModel.js');
+const BusinessConsultant = require('../models/businessConsultantModel.js');
 const jwt = require('jsonwebtoken');
 
 const getProfile = async (token) => {
@@ -16,20 +16,22 @@ const getProfile = async (token) => {
     }
 
     if (role === 'manager') {
-        const manager = await Manager.findOne({ where: { email: email } });
-        if (!manager) {
+        const businessConsultant = await BusinessConsultant.findOne({ where: { email: email } });
+        console.log(businessConsultant);
+        if (!businessConsultant) {
             throw new Error('Manager not found');
         }
         return {
-            id: manager.id,
-            name: manager.name,
-            phone: manager.phone,
-            email: manager.email,
+            id: businessConsultant.id,
+            name: businessConsultant.name,
+            phone: businessConsultant.phone,
+            email: businessConsultant.email,
             role: 'manager',
         };
     }
 
     const client = await Client.findOne({ where: { email: email } });
+    console.log(client);
     if (!client) {
         throw new Error('Client not found');
     }

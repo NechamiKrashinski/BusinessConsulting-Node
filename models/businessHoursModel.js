@@ -9,11 +9,11 @@ const BusinessHours = BusinessConsulting.define('BusinessHours', {
         autoIncrement: true
     },
 
-    consultant_id: {
+    business_consultant_id: {
         type: DataTypes.INTEGER,
         references: {
             model: BusinessConsultant, // ודא שהמודל קיים
-            key: 'consultant_id'
+            key: 'id'
         }
     },
     date: {
