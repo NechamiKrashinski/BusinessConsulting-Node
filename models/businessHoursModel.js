@@ -28,6 +28,9 @@ const BusinessHours = BusinessConsulting.define('BusinessHours', {
         type: DataTypes.TIME,
         allowNull: false
     }
+}, {
+    tableName: 'BusinessHours',
+    timestamps: false,
 });
 
 module.exports = BusinessHours;

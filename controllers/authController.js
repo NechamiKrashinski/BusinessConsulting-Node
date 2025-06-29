@@ -3,6 +3,8 @@ const asyncHandler = require('express-async-handler');
 
 const registerClient = asyncHandler(async (req, res) => {
     try {
+        console.log('Received registration request:', req.body);
+        
         const token = await AuthService.registerClient(req.body);
         res.status(201).json({ token });
     } catch (error) {

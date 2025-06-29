@@ -8,10 +8,10 @@ const clientRoutes = require('./routers/clientRouter');
 const serviceRoutes = require('./routers/serviceRouter');
 const loginRouter = require('./routers/authRouter');
 const profileRouter = require('./routers/profileRouter');
+const consultantServiceRouter = require('./routers/consultantServiceRouter.js')
 const { authenticateToken } = require('./middleware/authMiddleware');
 const { swaggerDocs, swaggerUi } = require('./swagger.js');
-const BusinessConsultant = require('./models/businessConsultantModel.js');
-const BusinessHours = require('./models/businessHoursModel.js');
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
-
+app.use('/consultant-services', consultantServiceRouter);
 app.use('/business-details', businessDetailRoutes);
 app.use('/clients', clientRoutes);
 // app.use('/meeting', availableTimeSlotsRoutes);

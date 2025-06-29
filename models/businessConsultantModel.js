@@ -23,17 +23,15 @@ const BusinessConsultant = BusinessConsulting.define('BusinessConsultant', {
     role:{
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue :'consultant',
         validate: {
-            isIn: [['client', 'manager']]
+            isIn: [['manager','consultant']]
         }
     }
-    // business_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: BusinessDetail,
-    //         key: 'business_id'
-    //     }
-    // }
+  
+}, {
+    tableName: 'BusinessConsultant',
+    timestamps: false,
 });
 
 module.exports = BusinessConsultant;

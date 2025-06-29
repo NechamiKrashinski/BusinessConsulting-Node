@@ -22,7 +22,10 @@ const ConsultantService = BusinessConsulting.define('ConsultantService', {
             model: Service,
             key: 'id'
         }
-    }
+    },
+}, {
+    tableName: 'ConsultantService',
+    timestamps: false,
 });
 
 module.exports = ConsultantService;
