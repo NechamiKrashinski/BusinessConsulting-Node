@@ -1,8 +1,5 @@
 const { DataTypes } = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
-// const BusinessHours = require('./businessHoursModel.js');
-// const Client = require('./clientModel.js');
-// const Service = require('./serviceModel.js');
 const {Service,Client,BusinessHours} = require('./associations.js'); // Importing from associations.js
 
 const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
@@ -19,7 +16,7 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
             key: 'id'
         }
     },
-    client_id: { // עמודה חדשה לקוח
+    client_id: { 
         type: DataTypes.INTEGER,
         references: {
             model: Client,
@@ -28,7 +25,7 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
     },
     service_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: Service,
             key: 'id'
@@ -47,7 +44,7 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM('confirmed', 'booked','canceled'),
+        type: DataTypes.ENUM('booked','confirmed','cancelled'),
         defaultValue: 'booked'
     },
     notes: {

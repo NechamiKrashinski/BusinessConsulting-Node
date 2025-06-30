@@ -1,30 +1,48 @@
-const { addBusinessHours, getBusinessHoursByConsultant, updateBusinessHours } = require('../services/businessHourService');
+const businessHoursService = require('../services/businessHoursService'); // נתיב ל-Service
 
- const createBusinessHours= async (req, res) => {
-        try {
-            const result = await addBusinessHours(req.body);
-            res.status(201).json(result);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
+// פונקציה להוסיף שעות עבודה ליועץ
+const createBusinessHours = async (req, res) => {
+    try {
+        const businessHoursData = req.body; // נתוני שעות העבודה מהבקשה
+        const newBusinessHours = await businessHoursService.addBusinessHours(businessHoursData);
+        res.status(201).json(newBusinessHours);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-
-  const  readBusinessHoursByConsultant= async (req, res) => {
-        try {
-            const hours = await getBusinessHoursByConsultant(req.params.consultantId);
-            res.status(200).json(hours);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
+};
+const getBusinessHoursByConsultant = async (req, res) => {
+    try {
+        const consultantId = req.params.consultantId; // נניח שה-ID של היועץ מועבר בכתובת ה-URL
+        const businessHours = await businessHoursService.getBusinessHoursByConsultant(consultantId);
+        res.json(businessHours);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-
-  const  putBusinessHours= async (req, res) => {
-        try {
-            await updateBusinessHours(req.params.consultantId, req.body.date, req.body.newStartTime, req.body.newEndTime);
-            res.status(200).json({ message: 'Business hours updated successfully' });
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
+}
+const getBusinessHours = async (req, res) => {
+    try {
+        const businessHours = await businessHoursService.getAllBusinessHours();
+        res.json(businessHours);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
+}
+const updateBusinessHours = async (req, res) => {
+    const { businessConsultantId, date, newStartTime, newEndTime } = req.body;
 
-module.exports = {createBusinessHours, readBusinessHoursByConsultant, putBusinessHours};
+    try {
+        const result = await businessHoursService.updateBusinessHours(businessConsultantId, date, newStartTime, newEndTime);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
+
+module.exports = {
+    createBusinessHours,
+    getBusinessHours,
+    getBusinessHoursByConsultant,
+    updateBusinessHours
+};
