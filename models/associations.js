@@ -4,7 +4,7 @@ const BusinessDetail = require('./businessDetailsModel.js');
 const BusinessConsultant = require('./businessConsultantModel.js');
 const Client = require('./clientModel.js');
 const Service = require('./serviceModel.js');
-const Meeting = require('./availableTimeSlotsModel.js');
+const Meeting = require('./meetingModel.js');
 const BusinessHours = require('./businessHoursModel.js');
 const ConsultantService = require('./consultantServiceModel.js');
 
