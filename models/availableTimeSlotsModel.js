@@ -19,7 +19,7 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
             key: 'id'
         }
     },
-    client_id: { // עמודה חדשה לקוח
+    client_id: { 
         type: DataTypes.INTEGER,
         references: {
             model: Client,
@@ -28,7 +28,7 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
     },
     service_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: Service,
             key: 'id'
@@ -47,8 +47,8 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM('available', 'booked'),
-        defaultValue: 'available'
+        type: DataTypes.ENUM('booked','confirmed','cancelled'),
+        defaultValue: 'booked'
     },
     notes: {
         type: DataTypes.STRING,

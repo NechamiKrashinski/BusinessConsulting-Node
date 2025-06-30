@@ -17,7 +17,7 @@ BusinessHours.belongsTo(BusinessConsultant, {
     foreignKey: 'business_consultant_id'
 });
 
-BusinessConsultant.hasMany(AvailableTimeSlots, {
+BusinessHours.hasMany(AvailableTimeSlots, {
     foreignKey: 'business_hour_id',
     onDelete: 'CASCADE'
 });
