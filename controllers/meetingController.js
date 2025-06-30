@@ -1,64 +1,71 @@
-const { AvailableTimeSlots } = require('../models/associations');
-const { getMeetings} = require('../services/availableTimeSlotService'); // נוודא שהנתיב נכון
+const {
+    createMeeting,
+    getMeetings,
+    updateMeeting,
+    deleteMeeting,
+    getAvailableTimes,
+    getConsultantsByService
+} = require('../services/meetingService.js');
 
-const createAvailableTimeSlots = async (req, res) => {
+const createMeetingController = async (req, res) => {
     try {
-        const availableTimeSlot = await AvailableTimeSlots.create(req.body);
-        res.status(201).json(availableTimeSlot);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error creating meeting time slot');
+        const meeting = await createMeeting(req.body.businessHourId, req.body.serviceId, req.body.clientId, req.body.date, req.body.startTime, req.body.endTime, req.body.notes);
+        res.status(201).json(meeting);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
-const getAvailableTimeSlots = async (req, res) => {
+const getMeetingsController = async (req, res) => {
     try {
-        const availableTimeSlots = await AvailableTimeSlots.findAll();
-        res.json(availableTimeSlots);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching meeting time slots');
+        const meetings = await getMeetings(req.params.clientId);
+        res.status(200).json(meetings);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
-const updateAvailableTimeSlots = async (req, res) => {
+const updateMeetingController = async (req, res) => {
     try {
-        const { id } = req.params;
-        await AvailableTimeSlots.update(req.body, { where: { id } });
-        res.status(200).send('Meeting time slot updated');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error updating meeting time slot');
+        await updateMeeting(req.params.id, req.body);
+        res.status(200).json({ message: 'Meeting updated successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
-const deleteAvailableTimeSlots = async (req, res) => {
+const deleteMeetingController = async (req, res) => {
     try {
-        const { id } = req.params;
-        await AvailableTimeSlots.destroy({ where: { id } });
+        await deleteMeeting(req.params.id);
         res.status(204).send();
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error deleting meeting time slot');
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
-const getMeetingsForClient = async (req, res) => {
-    const { clientId } = req.params; // נניח שה-ID של הלקוח מועבר בכתובת ה-URL
-
+const getAvailableTimesController = async (req, res) => {
     try {
-        const meetings = await getMeetings(clientId);
-        res.json(meetings);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching meetings for client');
+        const availableTimes = await getAvailableTimes(req.body.dates, req.body.businessConsultantIds);
+        res.status(200).json(availableTimes);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const getConsultantsByServiceController = async (req, res) => {
+    try {
+        const consultants = await getConsultantsByService(req.params.serviceId);
+        res.status(200).json(consultants);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
 module.exports = {
-    createAvailableTimeSlots,
-    getAvailableTimeSlots,
-    updateAvailableTimeSlots,
-    deleteAvailableTimeSlots,
-    getMeetingsForClient // הוספת פונקציה חדשה
+    createMeetingController,
+    getMeetingsController,
+    updateMeetingController,
+    deleteMeetingController,
+    getAvailableTimesController,
+    getConsultantsByServiceController
 };

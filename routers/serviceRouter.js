@@ -1,25 +1,20 @@
 const express = require('express');
-//require('../api-docs/serviceSwagger.json');
 const router = express.Router();
-const {
-    // createService,
-    // getServices,
-    // updateService,
-    // deleteService
-    readServices
-} = require('../controllers/serviceController');
+const serviceController = require('../controllers/serviceController.js');
 
-// Route ליצירת שירות
-// router.post('/', createService);
+// נתיב ליצירת שירות
+router.post('/', serviceController.createService);
 
-// // Route לקבלת כל השירותים
-// router.get('/', getServices);
+// נתיב לקבלת כל השירותים
+router.get('/', serviceController.getAllServices);
 
-// // Route לעדכון שירות לפי ID
-// router.put('/:id', updateService);
+// נתיב לקבלת שירות לפי מזהה
+router.get('/:id', serviceController.getServiceById);
 
-// // Route למחיקת שירות לפי ID
-// router.delete('/:id', deleteService);
-router.get('/', readServices);
+// נתיב לעדכון שירות
+router.put('/:id', serviceController.updateService);
+
+// נתיב למחיקת שירות
+router.delete('/:id', serviceController.deleteService);
 
 module.exports = router;

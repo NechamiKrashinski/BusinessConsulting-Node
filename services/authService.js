@@ -1,4 +1,4 @@
-const { Client, BusinessConsultant } = require('../models/associations.js');
+const { Client, BusinessConsultant, ConsultantService } = require('../models/associations.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -15,7 +15,7 @@ const registerClient = async (data) => {
         throw new Error('Please provide all required fields');
     }
 
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(password)) {
+    if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()]{6,}$/.test(password)) {
         throw new Error('Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number');
     }
 
@@ -63,15 +63,26 @@ const login = async (data) => {
 };
 
 const registerBusinessConsultant = async (data) => {
-    const { name, phone, email, password } = data;
-
+    const { name, phone, email, password ,role} = data;
+    console.log('Registering Business Consultant:', data);
+    
     if (!name || !email || !password) {
         throw new Error('Please provide all required fields');
     }
 
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(password)) {
-        throw new Error('Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number');
+if (password.length < 6) {
+        throw new Error('Password must be at least 6 characters long');
     }
+    if (!/[a-z]/.test(password)) {
+        throw new Error('Password must contain at least one lowercase letter');
+    }
+    if (!/[A-Z]/.test(password)) {
+        throw new Error('Password must contain at least one uppercase letter');
+    }
+    if (!/\d/.test(password)) {
+        throw new Error('Password must contain at least one number');
+    }
+
 
     const existingBusinessConsultant = await BusinessConsultant.findOne({ where: { email } });
 
@@ -87,8 +98,10 @@ const registerBusinessConsultant = async (data) => {
         phone,
         email,
         password: hashedPassword,
-        role: 'manager',
+        role: role || "consultant"
     });
+    console.log('Manager created:', manager);
+    
 
     if (!manager) {
         throw new Error('Error creating manager');
@@ -103,3 +116,5 @@ module.exports = {
     registerBusinessConsultant,
     
 };
+
+

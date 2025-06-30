@@ -4,7 +4,7 @@ const BusinessDetail = require('./businessDetailsModel.js');
 const BusinessConsultant = require('./businessConsultantModel.js');
 const Client = require('./clientModel.js');
 const Service = require('./serviceModel.js');
-const AvailableTimeSlots = require('./availableTimeSlotsModel.js');
+const Meeting = require('./availableTimeSlotsModel.js');
 const BusinessHours = require('./businessHoursModel.js');
 const ConsultantService = require('./consultantServiceModel.js');
 
@@ -17,19 +17,19 @@ BusinessHours.belongsTo(BusinessConsultant, {
     foreignKey: 'business_consultant_id'
 });
 
-BusinessHours.hasMany(AvailableTimeSlots, {
+BusinessHours.hasMany(Meeting, {
     foreignKey: 'business_hour_id',
     onDelete: 'CASCADE'
 });
-AvailableTimeSlots.belongsTo(BusinessHours, {
+Meeting.belongsTo(BusinessHours, {
     foreignKey: 'business_hour_id'
 });
 
-Client.hasMany(AvailableTimeSlots, {
+Client.hasMany(Meeting, {
     foreignKey: 'client_id',
     onDelete: 'CASCADE'
 });
-AvailableTimeSlots.belongsTo(Client, {
+Meeting.belongsTo(Client, {
     foreignKey: 'client_id'
 });
 
@@ -49,8 +49,8 @@ ConsultantService.belongsTo(BusinessConsultant, {
     foreignKey: 'consultant_id'
 });
 
-// הגדר את הקשרים בין AvailableTimeSlots ל-Service
-AvailableTimeSlots.belongsTo(Service, {
+// הגדר את הקשרים בין Meeting ל-Service
+Meeting.belongsTo(Service, {
     foreignKey: 'service_id'
 });
 
@@ -62,6 +62,6 @@ module.exports = {
     BusinessHours,
     Client,
     Service,
-    AvailableTimeSlots,
+    Meeting,
     ConsultantService
 };

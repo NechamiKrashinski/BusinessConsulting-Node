@@ -23,6 +23,8 @@ const login = asyncHandler(async (req, res) => {
 
 const registerBusinessConsultant = asyncHandler(async (req, res) => {
     try {
+        console.log('Received business consultant registration request:', req.body);
+        
         const token = await AuthService.registerBusinessConsultant(req.body);
         res.status(201).json({ token });
     } catch (error) {

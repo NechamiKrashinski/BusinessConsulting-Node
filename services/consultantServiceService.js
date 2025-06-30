@@ -2,7 +2,8 @@ const { ConsultantService } = require('../models/associations.js');
 
 const createConsultantService = async (data) => {
     const { consultant_id, service_id } = data;
-
+    console.log("Creating consultant-service relationship with data:", data);
+    
     if (!consultant_id || !service_id) {
         throw new Error('Please provide both consultant_id and service_id');
     }

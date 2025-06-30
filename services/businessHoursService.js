@@ -1,4 +1,4 @@
-const {BusinessHours,Consultant,AvailableTimeSlots} = require('../models/associations.js'); // נתיב המודל של שעות העבודה
+const {BusinessHours,Consultant,Meeting} = require('../models/associations.js'); // נתיב המודל של שעות העבודה
 const { Op } = require('sequelize');
 
 // פונקציה להוסיף שעות עבודה ליועץ
@@ -158,7 +158,7 @@ const updateBusinessHoursInDB = async (existingHours, timeSlots, businessConsult
 
 // פונקציה לעדכון פגישות חופפות
 const updateOverlappingAppointments = async (existingHours, timeSlots) => {
-    const overlappingSlots = await AvailableTimeSlots.findAll({
+    const overlappingSlots = await Meeting.findAll({
         where: {
             business_hour_id: existingHours.id,
             [Op.or]: [
@@ -171,7 +171,7 @@ const updateOverlappingAppointments = async (existingHours, timeSlots) => {
         await slot.update({ status: 'canceled' });
     }
 
-    const overlapping = await AvailableTimeSlots.findAll({
+    const overlapping = await Meeting.findAll({
         where: {
             business_hour_id: existingHours.id,
         }

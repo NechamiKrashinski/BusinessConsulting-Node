@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const {
-    createAvailableTimeSlots,
-    getAvailableTimeSlots,
-    updateAvailableTimeSlots,
-    deleteAvailableTimeSlots,
+    createMeeting,
+    getMeeting,
+    updateMeeting,
+    deleteMeeting,
     getMeetingsForClient // הוספת הפונקציה החדשה
-} = require('../controllers/availableTimeSlotsController');
+} = require('../controllers/meetingController');
 
 // Route ליצירת זמן פגישה
-router.post('/', createAvailableTimeSlots);
+router.post('/', createMeeting);
 
 // Route לקבלת כל זמני הפגישות
-router.get('/', getAvailableTimeSlots);
+router.get('/', getMeeting);
 
 // Route לעדכון זמן פגישה לפי ID
-router.put('/:id', updateAvailableTimeSlots);
+router.put('/:id', updateMeeting);
 
 // Route למחיקת זמן פגישה לפי ID
-router.delete('/:id', deleteAvailableTimeSlots);
+router.delete('/:id', deleteMeeting);
 
 // Route לקבלת מפגשים עבור לקוח לפי ID
 router.get('/meeting/:clientId', getMeetingsForClient); // הוספת הנתיב החדש

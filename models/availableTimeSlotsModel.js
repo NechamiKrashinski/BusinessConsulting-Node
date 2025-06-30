@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
 const {Service,Client,BusinessHours} = require('./associations.js'); // Importing from associations.js
 
-const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
+const Meeting = BusinessConsulting.define('Meeting', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -58,8 +58,8 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
         }
     },
 }, {
-    tableName: 'AvailableTimeSlots',
+    tableName: 'Meeting',
     timestamps: false,
 });
 
-module.exports = AvailableTimeSlots;
+module.exports = Meeting;

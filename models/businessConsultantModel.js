@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const BusinessConsulting = require('../connection/dbConnection.js');
-const BusinessDetail = require('./businessDetailsModel.js');
+
 
 const BusinessConsultant = BusinessConsulting.define('BusinessConsultant', {
     id: {
@@ -28,7 +28,6 @@ const BusinessConsultant = BusinessConsulting.define('BusinessConsultant', {
             isIn: [['manager','consultant']]
         }
     }
-  
 }, {
     tableName: 'BusinessConsultant',
     timestamps: false,

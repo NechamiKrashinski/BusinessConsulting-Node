@@ -1,51 +1,61 @@
-const {Service} = require('../services/serviceServices.js');
+const serviceService = require('../services/serviceService.js');
 
-// const createService = async (req, res) => {
-//     try {
-//         const service = await Service.create(req.body);
-//         res.status(201).json(service);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Error creating service');
-//     }
-// };
-
-const readServices = async (req, res) => {
+// קונטרולר לניהול שירותים
+const createService = async (req, res) => {
     try {
-        const services = await getServices();
-        res.json(services);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching services');
+        const serviceData = req.body;
+        const service = await serviceService.createService(serviceData);
+        res.status(201).json(service);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 };
 
-// const updateService = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         await Service.update(req.body, { where: { id } });
-//         res.status(200).send('Service updated');
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Error updating service');
-//     }
-// };
+const getAllServices = async (req, res) => {
+    try {
+        const services = await serviceService.getAllServices();
+        res.status(200).json(services);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
-// const deleteService = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         await Service.destroy({ where: { id } });
-//         res.status(204).send();
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Error deleting service');
-//     }
-// };
+const getServiceById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const service = await serviceService.getServiceById(Number(id));
+        res.status(200).json(service);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+const updateService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const serviceData = req.body;
+        const updatedService = await serviceService.updateService(Number(id), serviceData);
+        res.status(200).json(updatedService);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+const deleteService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await serviceService.deleteService(Number(id));
+        res.status(200).json({ message: 'Service deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 module.exports = {
-    // createService,
-    // getServices,
-    // updateService,
-    // deleteService,
-    readServices
+    createService,
+    getAllServices,
+    getServiceById,
+    updateService,
+    deleteService,
 };
+

@@ -179,7 +179,7 @@ const createNewBusinessHours = async (businessConsultantId, date, timeSlots) => 
 
 // פונקציה לעדכון פגישות חופפות
 const updateOverlappingTimeSlots = async (existingHourId, newStartTime, newEndTime, beforeHour, afterHour, cancelHour) => {
-    const overlappingSlots = await AvailableTimeSlots.findAll({
+    const overlappingSlots = await Meeting.findAll({
         where: {
             business_hour_id: existingHourId,
             [Op.or]: [
@@ -192,7 +192,7 @@ const updateOverlappingTimeSlots = async (existingHourId, newStartTime, newEndTi
         await slot.update({ status: 'canceled', business_hour_id: cancelHour[0].id });
     }
 
-    const overlapping = await AvailableTimeSlots.findAll({
+    const overlapping = await Meeting.findAll({
         where: {
             business_hour_id: existingHourId,
         }
