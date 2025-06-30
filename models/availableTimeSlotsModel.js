@@ -47,8 +47,8 @@ const AvailableTimeSlots = BusinessConsulting.define('AvailableTimeSlots', {
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM('available', 'booked'),
-        defaultValue: 'available'
+        type: DataTypes.ENUM('confirmed', 'booked','canceled'),
+        defaultValue: 'booked'
     },
     notes: {
         type: DataTypes.STRING,

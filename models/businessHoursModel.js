@@ -3,7 +3,7 @@ const BusinessConsulting = require('../connection/dbConnection.js');
 const {BusinessConsultant} = require('./associations.js');
 
 const BusinessHours = BusinessConsulting.define('BusinessHours', {
-    business_hour_id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -27,6 +27,10 @@ const BusinessHours = BusinessConsulting.define('BusinessHours', {
     end_time: {
         type: DataTypes.TIME,
         allowNull: false
+    },
+    is_active : {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
 }, {
     tableName: 'BusinessHours',
